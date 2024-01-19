@@ -11,4 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
       curlIndexDot: value,
     ));
   }
+  void changeSizeDot(){
+
+  }
 }

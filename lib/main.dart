@@ -51,6 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
       buildPage("4", Colors.deepPurple),
       buildPage("5", Colors.teal),
       buildPage("6", Colors.pink),
+      buildPage("7", Colors.amber),
+      buildPage("8", Colors.deepPurple),
+      buildPage("9", Colors.teal),
+      buildPage("10", Colors.pink),
 
     ];
 
@@ -102,14 +106,16 @@ class _MyHomePageState extends State<MyHomePage> {
           if (totalItems <= 5) {
             return buildDot(30, index, curlIndexDot);
           } else {
-            double size = 5;
+            double size;
             if (curlIndexDot <= 2) {
               if (index <= 2) {
                 size = 15;
               } else if (index == 3) {
                 size = 10;
-              } else {
+              } else if(index == 4){
                 size = 5;
+              }else{
+                size = 0;
               }
               return buildDot(size, index, curlIndexDot);
             } else if (curlIndexDot >= totalItems - 3) {
@@ -119,8 +125,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 size = 15;
               } else if (index == totalItems - 4) {
                 size = 10;
-              } else {
+              } else if (index == totalItems - 5){
                 size = 5;
+              }else{
+                size = 0;
               }
               return buildDot(size, index, curlIndexDot);
             } else {
@@ -129,8 +137,11 @@ class _MyHomePageState extends State<MyHomePage> {
               } else if (index == curlIndexDot - 1 ||
                   index == curlIndexDot + 1) {
                 size = 10;
-              } else {
+              } else if (index == curlIndexDot - 2 ||
+                  index == curlIndexDot + 2) {
                 size = 5;
+              }else{
+                size = 0;
               }
               return buildDot(size, index, curlIndexDot);
             }
@@ -140,6 +151,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
 
 Widget buildDot(double size, int index, int curIndexDot) {
   return AnimatedContainer(
