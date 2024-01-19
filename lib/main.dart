@@ -54,8 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
       buildPage("7", Colors.amber),
       buildPage("8", Colors.deepPurple),
       buildPage("9", Colors.teal),
-      buildPage("10", Colors.pink),
-
     ];
 
     return Scaffold(
@@ -98,73 +96,36 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget listDot(int totalItems, int curlIndexDot) {
+    Widget buildDotWithSize(double size, int index) {
+      return buildDot(size, index, curlIndexDot);
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
         totalItems,
-        (index) {
-          if (totalItems <= 5) {
-            return buildDot(30, index, curlIndexDot);
-          } else {
-            double size;
-            if (curlIndexDot <= 2) {
-              if (index <= 2) {
-                size = 15;
-              } else if (index == 3) {
-                size = 10;
-              } else if(index == 4){
-                size = 5;
-              }else{
-                size = 0;
-              }
-              return buildDot(size, index, curlIndexDot);
-            } else if (curlIndexDot >= totalItems - 3) {
-              if (index == totalItems - 3 ||
-                  index == totalItems - 2 ||
-                  index == totalItems - 1) {
-                size = 15;
-              } else if (index == totalItems - 4) {
-                size = 10;
-              } else if (index == totalItems - 5){
-                size = 5;
-              }else{
-                size = 0;
-              }
-              return buildDot(size, index, curlIndexDot);
-            } else {
-              if (index == curlIndexDot) {
-                size = 15;
-              } else if (index == curlIndexDot - 1 ||
-                  index == curlIndexDot + 1) {
-                size = 10;
-              } else if (index == curlIndexDot - 2 ||
-                  index == curlIndexDot + 2) {
-                size = 5;
-              }else{
-                size = 0;
-              }
-              return buildDot(size, index, curlIndexDot);
-            }
-          }
-        },
+        (index) => buildDotWithSize(
+            homeCubit.determineSize(
+              index,
+              totalItems,
+            ),
+            index),
       ),
     );
   }
-}
 
-
-
-Widget buildDot(double size, int index, int curIndexDot) {
-  return AnimatedContainer(
-    height: size,
-    width: size,
-    margin: const EdgeInsets.symmetric(horizontal: 5),
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      color: index == curIndexDot ? Colors.blue : Colors.white,
-    ),
-    duration: const Duration(seconds: 1),
-    // Provide an optional curve to make the animation feel smoother.
-    curve: Curves.fastOutSlowIn,
-  );
+  Widget buildDot(double size, int index, int curIndexDot) {
+    return AnimatedContainer(
+      height: size,
+      width: size,
+      margin: const EdgeInsets.symmetric(horizontal: 5),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: index == curIndexDot ? Colors.blue : Colors.white,
+      ),
+      duration: const Duration(seconds: 1),
+      // Provide an optional curve to make the animation feel smoother.
+      curve: Curves.fastOutSlowIn,
+    );
+  }
 }
