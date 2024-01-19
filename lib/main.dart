@@ -45,16 +45,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> items = [
-      buildPage("0", Colors.red),
       buildPage("1", Colors.blue),
       buildPage("2", Colors.green),
       buildPage("3", Colors.amber),
       buildPage("4", Colors.deepPurple),
       buildPage("5", Colors.teal),
       buildPage("6", Colors.pink),
-      buildPage("7", Colors.brown),
-      buildPage("8", Colors.green),
-      buildPage("9", Colors.greenAccent),
+
     ];
 
     return Scaffold(
@@ -145,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 Widget buildDot(double size, int index, int curIndexDot) {
-  return Container(
+  return AnimatedContainer(
     height: size,
     width: size,
     margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -153,5 +150,8 @@ Widget buildDot(double size, int index, int curIndexDot) {
       shape: BoxShape.circle,
       color: index == curIndexDot ? Colors.blue : Colors.white,
     ),
+    duration: const Duration(seconds: 1),
+    // Provide an optional curve to make the animation feel smoother.
+    curve: Curves.fastOutSlowIn,
   );
 }
