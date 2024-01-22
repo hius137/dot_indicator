@@ -13,40 +13,16 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   double determineSize(int index, int totalItems) {
+    int distance = (index >= state.curlIndexDot) ? (index - state.curlIndexDot) : (state.curlIndexDot - index);
+
     if (state.curlIndexDot <= 2) {
-      if (index <= 2) {
-        return 15;
-      } else if (index == 3) {
-        return 10;
-      } else if (index == 4) {
-        return 5;
-      } else {
-        return 0;
-      }
+      return (index <= 2) ? 15 : (index == 3) ? 10 : (index == 4) ? 5 : 0;
     } else if (state.curlIndexDot >= totalItems - 3) {
-      if (index == totalItems - 3 ||
-          index == totalItems - 2 ||
-          index == totalItems - 1) {
-        return 15;
-      } else if (index == totalItems - 4) {
-        return 10;
-      } else if (index == totalItems - 5) {
-        return 5;
-      } else {
-        return 0;
-      }
+      return (index >= totalItems - 3) ? 15 : (index == totalItems - 4) ? 10 : (index == totalItems - 5) ? 5 : 0;
     } else {
-      if (index == state.curlIndexDot) {
-        return 15;
-      } else if (index == state.curlIndexDot - 1 ||
-          index == state.curlIndexDot + 1) {
-        return 10;
-      } else if (index == state.curlIndexDot - 2 ||
-          index == state.curlIndexDot + 2) {
-        return 5;
-      } else {
-        return 0;
-      }
+      return (index == state.curlIndexDot) ? 15 :
+      (distance == 1) ? 10 :
+      (distance == 2) ? 5 : 0;
     }
   }
 }
